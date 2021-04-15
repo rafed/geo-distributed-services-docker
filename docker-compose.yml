@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  api-v1:
+    build: ./api-v1/
+    restart: always
+  
+  api-v2:
+    build: ./api-v2/
+    restart: always
+    
+  nginx:
+    build: ./nginx/
+    ports:
+      - 8080:80
+    depends_on:
+      - api-v1
+      - api-v2
