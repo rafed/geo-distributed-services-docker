@@ -1,12 +1,6 @@
 import requests
 import time
 
-def (detectfromGPSLocation):
-    if GPS == Dhaka:
-        hit.(dhaka.server.com)
-    elif GPS == Chittagong:
-        hit.(chittagong.server.com)
-
 url = "http://dhaka.server.com"
 
 for i in range(1000):
@@ -17,20 +11,3 @@ for i in range(1000):
 
     print(r.text)
     time.sleep(1)
-
-
-
-email_list = [omukh.com, omukh.com, omukh.com, omukh.com, omukh.com, omukh.com]
-
-rabbit_mq
-    email = [email,.com, email.com]
-
-
-
-def add_to_email_list(email):
-    rabbit_mq.append(email)
-
-def sendEmail():
-    email = rabbit_mq.get(email)
-    if email_list != None:
-        email_list[0].send()
