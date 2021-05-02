@@ -1,18 +1,73 @@
 version: '3'
 
+networks:
+  bdnet:
+    ipam:
+      config:
+        - subnet: 10.100.0.0/24
+
 services:
-  api-v1:
+  api-v1-dhaka:
     build: ./api-v1/
+    image: rafed123/rs-api-v1
     restart: always
-  
-  api-v2:
+    networks:
+      bdnet:
+        ipv4_address: 10.100.0.3
+
+  api-v2-dhaka:
     build: ./api-v2/
+    image: rafed123/rs-api-v2
     restart: always
+    networks:
+      bdnet:
+        ipv4_address: 10.100.0.4
     
-  nginx:
+  nginx-dhaka:
     build: ./nginx/
-    ports:
-      - 8080:80
+    # ports:
+    #   - 8080:80
     depends_on:
-      - api-v1
-      - api-v2
+      - api-v1-dhaka
+      - api-v2-dhaka
+    environment: 
+      - API_V1=api-v1-dhaka
+      - API_V2=api-v2-dhaka
+    command: /bin/sh -c "envsubst < /etc/nginx/conf.d/nginx.conf.template > /etc/nginx/conf.d/nginx.conf && nginx -g 'daemon off;'" 
+    networks:
+      bdnet:
+        ipv4_address: 10.100.0.2
+    
+  api-v1-chittagong:
+    build: ./api-v1/
+    image: rafed123/rs-api-v1
+    restart: always
+    networks:
+      bdnet:
+        ipv4_address: 10.100.0.30
+
+  api-v2-chittagong:
+    build: ./api-v2/
+    image: rafed123/rs-api-v2
+    restart: always
+    networks:
+      bdnet:
+        ipv4_address: 10.100.0.40
+
+  nginx-chittagong:
+    build: ./nginx/
+    environment: 
+      - API_V1=api-v1-chittagong
+      - API_V2=api-v2-chittagong
+    # ports:
+    #   - 8080:80
+    depends_on:
+      - api-v1-chittagong
+      - api-v2-chittagong
+    environment: 
+      - API_V1=api-v1-chittagong
+      - API_V2=api-v2-chittagong
+    command: /bin/sh -c "envsubst < /etc/nginx/conf.d/nginx.conf.template > /etc/nginx/conf.d/nginx.conf && nginx -g 'daemon off;'" 
+    networks:
+      bdnet:
+        ipv4_address: 10.100.0.20
