@@ -9,7 +9,7 @@ This repo is a simple implementation of a geo-distributed system with flask, ngi
 To run the system you need only docker installed
 
 ```bash
-$ sudo apt-get install docker.io
+$ sudo apt install docker.io
 ```
 
 Additionally put the following configuration in **/etc/hosts**. (This is for the fake dns)
@@ -27,13 +27,13 @@ Additionally put the following configuration in **/etc/hosts**. (This is for the
 First build the containers with
 
 ```bash
-docker-compose builld
+$ docker-compose build
 ```
 
 Now run the servers with
 
 ```bash
-docker-compose up
+$ docker-compose up
 ```
 
 ##### Server
@@ -52,6 +52,6 @@ Now run the client.
 $ (env) python client/client.py
 ```
 
-In the client try alternating the following domains:
+In the client, try alternating the following domains:
 * dhaka.server.com
 * chittagong.server.com
